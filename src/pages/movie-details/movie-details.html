@@ -1,0 +1,64 @@
+<!--
+  Generated template for the MovieDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>movieDetails</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card *ngIf='movie'>
+
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"/>
+
+    <ion-card-content>
+      <ion-card-title>
+        {{ movie.title }}
+      </ion-card-title>
+      <p style="text-align: justify;">
+        {{ movie.overview }}
+      </p>
+      <div style="display: flex; justify-content:flex-end;margin-top:10px">
+        <ion-badge style='margin-right:5px' color='danger' item-end *ngFor='let genre of movie.genres'>{{genre.name}}</ion-badge>
+      </div>
+    </ion-card-content>
+
+    <ion-item>
+      <!-- <div *ngIf='movie.vote_average > 6'> -->
+        <ion-icon *ngIf='movie.vote_average > 6' name='thumbs-up' item-start></ion-icon>
+        <!-- <ion-icon *ngIf='movie.vote_average <= 6' name='thumbs-down' item-start style="color: #d81e1e"></ion-icon> -->
+        Vote Average
+        <ion-badge *ngIf='movie.vote_average > 6' item-end color='secondary'>{{ movie.vote_average*10 }}%</ion-badge>
+        <ion-badge *ngIf='movie.vote_average <= 6' item-end color='danger'>{{ movie.vote_average*10 }}%</ion-badge>
+      <!-- </div> -->
+      
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name='closed-captioning' item-start></ion-icon>
+      <span *ngIf='movie.spoken_languages.length <= 2'>
+        Languages
+      </span>
+      <ion-badge item-end *ngFor='let lang of movie.spoken_languages'>{{lang.english_name}}</ion-badge>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-icon name='star' item-start></ion-icon>
+      Genres
+      
+    </ion-item> -->
+
+    <ion-item>
+      <ion-icon name='calendar' item-start></ion-icon>
+      Release Date
+      <ion-badge color='dark' item-end>{{movie.release_date}}</ion-badge>
+    </ion-item>
+
+  </ion-card>
+
+</ion-content>

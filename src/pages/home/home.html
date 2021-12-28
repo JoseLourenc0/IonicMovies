@@ -5,13 +5,27 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngFor='let movie of moviesList' (click)='openDetails(movie)'>
+    <!-- <img src="./../../assets/imgs/madison.jpg" /> -->
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path" />
+    <ion-card-header>
+      <!-- <ion-card-subtitle>Destination</ion-card-subtitle> -->
+      <ion-card-title>
+        <div style="white-space: normal">
+          {{ movie.title }}
+        </div>
+      </ion-card-title>
+    </ion-card-header>
+
+    
+    <ion-card-content style="text-align: justify;">
+      {{ movie.overview }}
+    </ion-card-content>
+
+  </ion-card>
 </ion-content>
